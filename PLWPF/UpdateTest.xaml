@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="PLWPF.UpdateTest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+              xmlns:BE="clr-namespace:BE;assembly=BE"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLWPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="700">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Test}, CreateList=True}"/>
+    </UserControl.Resources>
+    <DockPanel x:Name="UpdateDockPanel">
+
+        <StackPanel DockPanel.Dock="Left" Background="Bisque" Width="350">
+            <TextBlock x:Name="noTests" Text="There are no tests to update" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" Width="auto" Margin="0,23,0,0" Visibility="Hidden"/>
+
+            <GroupBox Header="Test Detils" Background="AliceBlue" Height="145" Width="216" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,15,0,0">
+                <Grid x:Name="TestDetailsGrid" Height="116" Width="200" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="4,7,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Test Id:"/>
+                    <ComboBox x:Name="testIdComboBox" Width="120" VerticalAlignment="Center" Grid.Row="0" Margin="3" ItemsSource="{Binding TestsListForPL}"
+                                  Height="Auto" HorizontalAlignment="Left" DisplayMemberPath="TestId" Grid.Column="1" SelectionChanged="TestIdComboBox_SelectionChanged"/>
+
+                    <Label Content="Test Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="testDateDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" BorderThickness="0" VerticalAlignment="Center" Width="120" Height="23"/>
+
+                    <Label Content="Tester Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBox x:Name="testerIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" BorderThickness="0"
+                                     Text="{Binding TesterId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+                    <Label Content="Trainee Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="traineeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" BorderThickness="0"
+                                     Text="{Binding TraineeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox x:Name="commentsGroupBox" Header="comments:" Background="AliceBlue" Margin="0,20,0,0" Height="100" Width="216">
+                <TextBox x:Name="commentsTextBox" HorizontalAlignment="Left" Height="60" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185" Background="AliceBlue" BorderThickness="0"/>
+            </GroupBox>
+
+            <GroupBox Background="AliceBlue" Height="45" Width="216" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <Grid x:Name="testPassedGrid" Height="40" Width="200" VerticalAlignment="Top" Margin="0,5,4,-6" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Test Passed:" Grid.Column="0" HorizontalAlignment="Right" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="testPassedCheckBox" IsThreeState="True" Grid.Column="1" HorizontalAlignment="Left" 
+                                             IsChecked="{Binding TestPassed, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+
+                </Grid>
+            </GroupBox>
+            <!--<TextBlock x:Name="warningTextBlock1" Text="ERROR, Please fill field" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" Width="auto" Margin="8" Visibility="Hidden"/>-->
+
+        </StackPanel>
+
+        <StackPanel Background="Bisque" DockPanel.Dock="Right" Width="350">
+            <TextBlock x:Name="whatToDoTextBlock" Text="Click once to confirm and twice to disqualify:" Foreground="Blue" VerticalAlignment="Center" Width="240" Margin="0,23,0,0"/>
+            <GroupBox Background="AliceBlue" VerticalAlignment="Center" HorizontalAlignment="Center" Height="323" Width="200" Margin="0,15,0,0">
+                <Grid x:Name="BoolItemsGrid" VerticalAlignment="Top" Margin="0,0,-2,-6" HorizontalAlignment="Stretch" Height="320">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="31"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Check Mirrors:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="checkMirrorsCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left"
+                                      IsChecked="{Binding CheckMirrors, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+
+                    <Label Content="Imediate Stop:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="imediateStopCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left"
+                                      IsChecked="{Binding ImediateStop, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3,0,0,8" Grid.Row="1" VerticalAlignment="Bottom" />
+
+                    <Label Content="Kept Distance:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="keptDistanceCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left"
+                                      IsChecked="{Binding KeptDistance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3,0,0,8" Grid.Row="2" VerticalAlignment="Bottom" />
+
+                    <Label Content="Kept Rightof Presidence:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="keptRightofPresidenceCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Right"
+                                      IsChecked="{Binding KeptRightofPresidence, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="0,8,5,8" Grid.Row="3" VerticalAlignment="Center" />
+
+                    <Label Content="Parking:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="parkingCheckBox" Content="" Grid.Column="1"
+                                      IsChecked="{Binding Parking, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3,8,4,8" Grid.Row="4" VerticalAlignment="Center" />
+
+                    <Label Content="Reverse Parking:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="reverseParkingCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left"
+                                      IsChecked="{Binding ReverseParking, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="5" VerticalAlignment="Center" />
+
+                    <Label Content="Right Turn:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="rightTurnCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left"
+                                      IsChecked="{Binding RightTurn, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="6" VerticalAlignment="Center" />
+
+                    <Label Content="Stopped Atcross Walk:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="stoppedAtcrossWalkCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left"
+                                      IsChecked="{Binding StoppedAtcrossWalk, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="7" VerticalAlignment="Center" />
+
+                    <Label Content="Stopped At Red:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="stoppedAtRedCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left"
+                                      IsChecked="{Binding StoppedAtRed, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
+
+                    <Label Content="Used Signal:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
+                    <CheckBox x:Name="usedSignalCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left"
+                                          IsChecked="{Binding UsedSignal, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
+
+                </Grid>
+            </GroupBox>
+            <TextBlock x:Name="warningTextBlock" Text="ERROR, Please fill all fields" Foreground="Red" VerticalAlignment="Center" Width="auto" Margin="8" HorizontalAlignment="Center" Visibility="Hidden"/>
+            <Button x:Name="saveButton" Content="Check" Width="75" Click="SaveButton_Click"/>
+
+
+        </StackPanel>
+
+    </DockPanel>
+</UserControl>

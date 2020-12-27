@@ -1,0 +1,23 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        xmlns:BE="clr-namespace:BE;assembly=BE" x:Class="PLWPF.ManageTests"
+        mc:Ignorable="d"
+        Title="Manage Tests" Height="527.855" Width="786.874" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="testViewSource" d:DesignSource="{d:DesignInstance {x:Type BE:Test}, CreateList=True}"/>
+    </Window.Resources>
+    <DockPanel LastChildFill="True" Background="AliceBlue">
+        <TabControl Background="Bisque" SelectedIndex="0"  >
+            <TabItem x:Name="Add" Header="Add Test" >
+                <local:AddTestUserControl Loaded="AddTestUserControl_Loaded"/>
+            </TabItem>
+            <TabItem x:Name="Update" Header="Update Test">
+                <local:UpdateTest ></local:UpdateTest>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

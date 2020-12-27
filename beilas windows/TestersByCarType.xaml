@@ -1,0 +1,24 @@
+﻿<Window x:Class="PLWPF.TestersByCarType"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLWPF"
+        mc:Ignorable="d"
+        Title="TestersByCarType" Height="450" Width="800">
+    <DockPanel LastChildFill="True">
+        <DockPanel>
+            <DockPanel Background="Bisque" DockPanel.Dock="Top">
+                <Label DockPanel.Dock="Left"  Content="Select type of car:" Margin="10"/>
+                <ComboBox x:Name="testercarComboBox" SelectedItem="{Binding Testercar}" Width="100" Margin="10" HorizontalAlignment="Left"/>
+            </DockPanel>
+            <DockPanel Background="Azure">
+                
+            </DockPanel>
+            
+                <!--<ComboBox x:Name="testercarComboBox" Grid.Column="1"  HorizontalAlignment="Left" Height="Auto" SelectedItem="{Binding Testercar}" Margin="3" Grid.Row="7" VerticalAlignment="Center" Width="120"/>-->
+           
+
+        </DockPanel>
+    </DockPanel>
+</Window>
